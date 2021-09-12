@@ -5,7 +5,7 @@ function CommitZero(props: TaskProps) {
   return (
     <Window width={400} height={450} title="CommitZero" taskProps={props}>
       <iframe
-        src="http://commitzero.sampaioleal.dev.br"
+        src="https://commitzero.sampaioleal.dev.br"
         width="100%"
         height="100%"
         title="CommitZero"
