@@ -3,7 +3,6 @@ import BasicButton from "../components/BasicButton";
 import Window from "../components/Window";
 import { TaskProps } from "../stores/taskManager";
 
-// https://discord.com/channels/327861810768117763/384756018799706123/886398368690098247
 function AboutSystem(props: TaskProps) {
   return (
     <Window width={400} height={450} title="About MuiOS" taskProps={props}>

@@ -5,7 +5,7 @@ import {
   Box,
   ClickAwayListener,
   darken,
-  Fade,
+  Grow,
   IconButton,
   styled,
   Typography,
@@ -53,15 +53,12 @@ const ProfileBar = styled(Box)(({ theme }) => ({
   borderStyle: "solid",
 }));
 
-// TODO: fix fadeOut transition
-// https://discord.com/channels/327861810768117763/384756018799706123/886398448776138852
-// https://discord.com/channels/@me/845465781437333504/886398878537089065
 function StartMenu() {
   return (
     <ClickAwayListener
       onClickAway={systemStore.isMenuOpen ? systemStore.closeMenu : () => {}}
     >
-      <Fade in={systemStore.isMenuOpen}>
+      <Grow in={systemStore.isMenuOpen}>
         <MenuModal>
           <Box flexGrow={1}></Box>
           <ProfileBar>
@@ -72,7 +69,7 @@ function StartMenu() {
             </IconButton>
           </ProfileBar>
         </MenuModal>
-      </Fade>
+      </Grow>
     </ClickAwayListener>
   );
 }

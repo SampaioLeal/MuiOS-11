@@ -30,8 +30,6 @@ const Desktop = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-// TODO: Explorer - https://discord.com/channels/@me/845465781437333504/886399136033820692
-// TODO: Search - https://discord.com/channels/@me/845465781437333504/886398685360054312
 function App() {
   useEffect(() => {
     taskManager.open("muiosver");
@@ -56,6 +54,8 @@ function App() {
             return createElement(task.exe, {
               key: `program-${task.id}`,
               handleClose: () => taskManager.close(task.id),
+              isFocused: task.isFocused,
+              id: task.id,
             });
           })}
         </Desktop>

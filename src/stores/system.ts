@@ -21,6 +21,13 @@ class SystemStore {
   getTheme() {
     return this.themes[this.theme];
   }
+  toggleTheme() {
+    if (this.theme === "light") {
+      this.theme = "dark";
+    } else {
+      this.theme = "light";
+    }
+  }
 
   isMenuOpen = false;
   openMenu() {

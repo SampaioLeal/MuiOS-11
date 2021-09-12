@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { ReactNode } from "react";
 import Draggable from "react-draggable";
 import desktopStore from "../stores/desktop";
-import { TaskProps } from "../stores/taskManager";
+import taskManager, { TaskProps } from "../stores/taskManager";
 import { TopBar } from "./TopBar";
 
 interface WindowProps {
@@ -27,19 +27,21 @@ const WindowPaper = styled(Paper)(({ theme }) => ({
 }));
 
 function Window(props: WindowProps) {
-  const { children, width, height, title } = props;
+  const { children, title, width, height } = props;
   const defaultPosition = {
     x: window.innerWidth / 2 - width / 2,
     y: desktopStore.screenHeight / 2 - height / 2,
   };
 
+  function handleFocus() {
+    if (!props.taskProps.isFocused) {
+      taskManager.setFocus(props.taskProps.id);
+    }
+  }
+
   return (
-    <Draggable
-      defaultPosition={defaultPosition}
-      handle=".topBar"
-      onMouseDown={console.log}
-    >
-      <WindowPaper sx={{ width, height }}>
+    <Draggable defaultPosition={defaultPosition} handle=".topBar">
+      <WindowPaper onClick={handleFocus} sx={{ width, height }}>
         <TopBar
           className="topBar"
           title={title}

@@ -9,7 +9,7 @@ const TaskButton = styled(ButtonBase)<TaskButtonProps>(({ theme, active }) => ({
   height: desktopStore.taskBarHeight - 8,
   width: desktopStore.taskBarHeight - 8,
   borderRadius: 6,
-  background: active ? theme.buttons.basicButton : "transparent",
+  background: active ? alpha(theme.buttons.basicButton, 0.5) : "transparent",
   transition: theme.transitions.create(["background"], {
     duration: "0.1s",
   }),

@@ -11,6 +11,8 @@ export interface Task extends Executable {
 }
 
 export interface TaskProps {
+  id: number;
+  isFocused: boolean;
   handleClose(): void;
 }
 
@@ -32,8 +34,11 @@ class TaskManager {
     );
   }
 
-  get activeTasks() {
-    return Array.from(this.tasks.values()).filter((task) => !task.isMinimized);
+  setFocus(id: number) {
+    this.tasks.forEach((task) => {
+      if (task.id === id) task.isFocused = true;
+      else task.isFocused = false;
+    });
   }
 
   open(program: string) {
@@ -54,6 +59,7 @@ class TaskManager {
       program,
       ...executable,
     });
+    this.lastId = id;
   }
 
   close(id: number) {
@@ -70,6 +76,10 @@ class TaskManager {
         task.isFocused = false;
       }
     }
+  }
+
+  get activeTasks() {
+    return Array.from(this.tasks.values()).filter((task) => !task.isMinimized);
   }
 }
 

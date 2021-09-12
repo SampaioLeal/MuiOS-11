@@ -1,4 +1,4 @@
-import { Info } from "@mui/icons-material";
+import { Book, Info } from "@mui/icons-material";
 import { makeAutoObservable } from "mobx";
 
 type IconSize = "inherit" | "large" | "medium" | "small";
@@ -17,6 +17,11 @@ class DesktopStore {
       title: "About MuiOS 11",
       icon: Info,
       exe: "muiosver",
+    },
+    {
+      title: "CommitZero",
+      icon: Book,
+      exe: "commitzero",
     },
   ];
 }

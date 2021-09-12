@@ -1,4 +1,4 @@
-import { Apps, Search } from "@mui/icons-material";
+import { Apps, Search, Brightness4, Brightness7 } from "@mui/icons-material";
 import { AppBar, styled, alpha } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { createElement } from "react";
@@ -50,6 +50,13 @@ function TaskBar() {
       </TaskButton>
       <TaskButton onClick={handleToggleMenu}>
         <Search fontSize={desktopStore.taskBarIconSize} color="action" />
+      </TaskButton>
+      <TaskButton onClick={systemStore.toggleTheme}>
+        {systemStore.theme === "light" ? (
+          <Brightness4 color="action" />
+        ) : (
+          <Brightness7 color="action" />
+        )}
       </TaskButton>
 
       {renderTasks()}
