@@ -1,32 +1,28 @@
 import { ThemeProvider } from "@emotion/react";
-import { Apps } from "@mui/icons-material";
-import { alpha, AppBar, Box, CssBaseline, styled } from "@mui/material";
+import { Box, CssBaseline, styled } from "@mui/material";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { createElement } from "react";
+import DesktopItem from "./components/DesktopItem";
 import StartMenu from "./components/StartMenu";
-import TaskButton from "./components/TaskButton";
+import TaskBar from "./components/TaskBar";
 import desktopStore from "./stores/desktop";
-import theme from "./theme";
+import systemStore from "./stores/system";
+import taskManager from "./stores/taskManager";
 
-const Screen = styled(Box)({
+const Screen = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   height: "100vh",
   width: "100vw",
-  backgroundImage: "url(/wallpaper.jpeg)",
+  backgroundImage:
+    theme.palette.mode === "light"
+      ? "url(/wallpaper.jpeg)"
+      : "url(/wallpaper-dark.jpg)",
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-});
-
-const TaskBar = styled(AppBar)(({ theme }) => ({
-  position: "relative",
-  background: alpha(theme.palette.background.paper, 0.9),
-  backdropFilter: "blur(10px)",
-  height: theme.spacing(7),
-
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
+  overflow: "hidden",
 }));
 
 const Desktop = styled(Box)(({ theme }) => ({
@@ -34,24 +30,41 @@ const Desktop = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
+// TODO: Explorer - https://discord.com/channels/@me/845465781437333504/886399136033820692
+// TODO: Search - https://discord.com/channels/@me/845465781437333504/886398685360054312
 function App() {
+  useEffect(() => {
+    taskManager.open("muiosver");
+  }, []);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={systemStore.getTheme()}>
       <CssBaseline />
 
       <Screen>
-        <Desktop></Desktop>
+        <Desktop>
+          {desktopStore.items.map((item, index) => (
+            <DesktopItem
+              key={`program-${index}`}
+              title={item.title}
+              icon={item.icon}
+              exe={item.exe}
+            />
+          ))}
+
+          {taskManager.activeTasks.map((task) => {
+            return createElement(task.exe, {
+              key: `program-${task.id}`,
+              handleClose: () => taskManager.close(task.id),
+            });
+          })}
+        </Desktop>
 
         <StartMenu />
-
-        <TaskBar>
-          <TaskButton onClick={desktopStore.openMenu}>
-            <Apps fontSize="large" color="primary" />
-          </TaskButton>
-        </TaskBar>
+        <TaskBar />
       </Screen>
     </ThemeProvider>
   );
 }
 
-export default App;
+export default observer(App);
