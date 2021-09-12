@@ -2,10 +2,10 @@ import { ThemeProvider } from "@emotion/react";
 import { Box, CssBaseline, styled } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import { createElement } from "react";
 import DesktopItem from "./components/DesktopItem";
 import StartMenu from "./components/StartMenu";
 import TaskBar from "./components/TaskBar";
+import WindowManager from "./components/WindowManager";
 import desktopStore from "./stores/desktop";
 import systemStore from "./stores/system";
 import taskManager from "./stores/taskManager";
@@ -50,14 +50,7 @@ function App() {
             />
           ))}
 
-          {taskManager.activeTasks.map((task) => {
-            return createElement(task.exe, {
-              key: `program-${task.id}`,
-              handleClose: () => taskManager.close(task.id),
-              isFocused: task.isFocused,
-              id: task.id,
-            });
-          })}
+          <WindowManager />
         </Desktop>
 
         <StartMenu />

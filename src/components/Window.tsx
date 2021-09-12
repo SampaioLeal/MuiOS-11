@@ -1,59 +1,60 @@
 import { Box, Paper, styled, alpha } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { ReactNode } from "react";
-import Draggable from "react-draggable";
-import desktopStore from "../stores/desktop";
-import taskManager, { TaskProps } from "../stores/taskManager";
+import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
+import windowManager from "../stores/windowManager";
 import { TopBar } from "./TopBar";
 
-interface WindowProps {
+export interface WindowProps extends TaskProps {
   children: ReactNode;
   width: number;
   height: number;
   title: string;
-  taskProps: TaskProps;
 }
 
 const WindowPaper = styled(Paper)(({ theme }) => ({
+  height: "100%",
+  width: "100%",
   borderRadius: theme.spacing(1),
   boxShadow: theme.shadows[4],
   display: "flex",
   flexDirection: "column",
-  position: "absolute",
-  top: 0,
+
   backgroundImage: "none",
   background: alpha(theme.palette.background.paper, 0.95),
   backdropFilter: "blur(10px)",
 }));
 
-function Window(props: WindowProps) {
-  const { children, title, width, height } = props;
-  const defaultPosition = {
-    x: window.innerWidth / 2 - width / 2,
-    y: desktopStore.screenHeight / 2 - height / 2,
-  };
+const WindowContainer = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: 0,
+  zIndex: 1,
+}));
 
-  function handleFocus() {
-    if (!props.taskProps.isFocused) {
-      taskManager.setFocus(props.taskProps.id);
-    }
+function Window(props: WindowProps) {
+  const { children, width, height, window } = props;
+
+  function updatePosition(e: DraggableEvent, data: DraggableData) {
+    windowManager.setPosition(props.window.taskId, data.x, data.y);
   }
 
   return (
-    <Draggable defaultPosition={defaultPosition} handle=".topBar">
-      <WindowPaper onClick={handleFocus} sx={{ width, height }}>
-        <TopBar
-          className="topBar"
-          title={title}
-          noMaximize
-          {...props.taskProps}
-        />
+    <WindowContainer>
+      <Draggable
+        defaultClassName="window"
+        defaultPosition={{ x: window.x, y: window.y }}
+        handle=".topBar"
+        onStop={updatePosition}
+      >
+        <WindowPaper sx={{ width, height }}>
+          <TopBar className="topBar" noMinimize noMaximize {...props} />
 
-        <Box display="flex" flexDirection="column" flexGrow={1} padding={2}>
-          {children}
-        </Box>
-      </WindowPaper>
-    </Draggable>
+          <Box display="flex" flexDirection="column" flexGrow={1} padding={2}>
+            {children}
+          </Box>
+        </WindowPaper>
+      </Draggable>
+    </WindowContainer>
   );
 }
 

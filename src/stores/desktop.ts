@@ -11,7 +11,7 @@ class DesktopStore {
   taskBarIconSize: IconSize = "medium";
   taskBarHeight = 40;
   topBarHeight = 32;
-  screenHeight = window.innerHeight - this.taskBarHeight;
+  desktopHeight = window.innerHeight - this.taskBarHeight;
   items = [
     {
       title: "About MuiOS 11",

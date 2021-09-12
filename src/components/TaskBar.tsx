@@ -5,6 +5,7 @@ import { createElement } from "react";
 import desktopStore from "../stores/desktop";
 import systemStore from "../stores/system";
 import taskManager from "../stores/taskManager";
+import windowManager from "../stores/windowManager";
 import TaskButton from "./TaskButton";
 
 const TaskBarContainer = styled(AppBar)(({ theme }) => ({
@@ -24,10 +25,10 @@ function TaskBar() {
     return taskManager.allTasks.map((task) => (
       <TaskButton
         key={task.id}
-        active={task.isFocused}
+        // active={task.isFocused}
         onClick={() => {
           systemStore.closeMenu();
-          taskManager.toggleVisibility(task.id);
+          windowManager.toggleVisibility(task.id);
         }}
       >
         {createElement(task.icon, {

@@ -1,11 +1,16 @@
 import { Box, Divider, Typography } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import BasicButton from "../components/BasicButton";
 import Window from "../components/Window";
-import { TaskProps } from "../stores/taskManager";
 
 function AboutSystem(props: TaskProps) {
   return (
-    <Window width={400} height={450} title="About MuiOS" taskProps={props}>
+    <Window
+      width={props.window.width}
+      height={props.window.height}
+      title="About MuiOS"
+      {...props}
+    >
       <Box flexGrow={1}>
         <Typography variant="h2" color="primary" align="center">
           MuiOS 11
@@ -32,4 +37,4 @@ function AboutSystem(props: TaskProps) {
   );
 }
 
-export default AboutSystem;
+export default observer(AboutSystem);

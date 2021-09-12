@@ -5,7 +5,9 @@ interface TaskButtonProps {
   active?: boolean;
 }
 
-const TaskButton = styled(ButtonBase)<TaskButtonProps>(({ theme, active }) => ({
+const TaskButton = styled(ButtonBase, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<TaskButtonProps>(({ theme, active }) => ({
   height: desktopStore.taskBarHeight - 8,
   width: desktopStore.taskBarHeight - 8,
   borderRadius: 6,

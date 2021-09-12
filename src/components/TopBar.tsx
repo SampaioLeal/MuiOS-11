@@ -1,6 +1,6 @@
 import { Close } from "@mui/icons-material";
 import { Box, ButtonBase, styled, Typography, alpha } from "@mui/material";
-import { TaskProps } from "../stores/taskManager";
+import { WindowProps } from "./Window";
 
 export const TopBarContainer = styled(Box)(({ theme }) => ({
   borderTopLeftRadius: theme.spacing(1),
@@ -27,8 +27,7 @@ export const CloseButton = styled(ButtonBase)(({ theme }) => ({
   transition: theme.transitions.create(["background", "color"]),
 }));
 
-interface TopBarProps extends TaskProps {
-  title: string;
+interface TopBarProps extends WindowProps {
   noMinimize?: boolean;
   noMaximize?: boolean;
   className?: string;

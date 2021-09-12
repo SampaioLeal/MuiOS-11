@@ -36,6 +36,13 @@ class SystemStore {
   closeMenu() {
     this.isMenuOpen = false;
   }
+
+  get screenWidth() {
+    return window.innerWidth;
+  }
+  get screenHeight() {
+    return window.innerHeight;
+  }
 }
 
 const systemStore = new SystemStore();
