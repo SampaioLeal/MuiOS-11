@@ -5,12 +5,7 @@ import Window from "../components/Window";
 
 function AboutSystem(props: TaskProps) {
   return (
-    <Window
-      width={props.window.width}
-      height={props.window.height}
-      title="About MuiOS"
-      {...props}
-    >
+    <Window title="About MuiOS" {...props}>
       <Box flexGrow={1}>
         <Typography variant="h2" color="primary" align="center">
           MuiOS 11

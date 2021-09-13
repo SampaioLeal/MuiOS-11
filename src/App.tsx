@@ -23,6 +23,8 @@ const Screen = styled(Box)(({ theme }) => ({
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   overflow: "hidden",
+
+  transition: theme.transitions.create(["background-image"]),
 }));
 
 const Desktop = styled(Box)(({ theme }) => ({

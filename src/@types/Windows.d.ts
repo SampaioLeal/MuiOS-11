@@ -3,6 +3,7 @@ interface IWindow {
   taskId: number;
   isFocused: boolean;
   isMinimized: boolean;
+  isResizable?: boolean;
   width: number;
   height: number;
   x: number;

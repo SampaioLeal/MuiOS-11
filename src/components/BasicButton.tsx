@@ -4,9 +4,6 @@ const BasicButton = styled(ButtonBase)(({ theme }) => ({
   borderRadius: 6,
   background: theme.buttons.basicButton,
   padding: theme.spacing(1),
-  transition: theme.transitions.create(["background"], {
-    duration: "0.1s",
-  }),
   color: theme.palette.getContrastText(theme.buttons.basicButton),
   border: `solid 1px ${theme.palette.divider}`,
 

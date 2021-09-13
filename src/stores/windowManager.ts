@@ -29,6 +29,7 @@ class WindowManager {
       taskId: id,
       isFocused: true,
       isMinimized: false,
+      isResizable: executable.isResizable,
       width: executable.defaultSize.width,
       height: executable.defaultSize.height,
       x: window.innerWidth / 2 - executable.defaultSize.width / 2,

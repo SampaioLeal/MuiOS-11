@@ -11,6 +11,7 @@ export const TopBarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   paddingLeft: theme.spacing(1),
+  transition: theme.transitions.create(["background"]),
 }));
 
 export const CloseButton = styled(ButtonBase)(({ theme }) => ({

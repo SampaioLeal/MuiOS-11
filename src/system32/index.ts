@@ -5,6 +5,7 @@ import CommitZero from "./CommitZero";
 export const sysExecutables: { [key: string]: Executable } = {
   muiosver: {
     signleInstance: true,
+    isResizable: false,
     exe: AboutSystem,
     icon: Info,
     defaultSize: {
@@ -17,8 +18,8 @@ export const sysExecutables: { [key: string]: Executable } = {
     exe: CommitZero,
     icon: Book,
     defaultSize: {
-      width: 400,
-      height: 450,
+      width: 700,
+      height: 500,
     },
   },
 };

@@ -1,4 +1,4 @@
-import { Apps, Search, Brightness4, Brightness7 } from "@mui/icons-material";
+import { Apps, Brightness4, Brightness7 } from "@mui/icons-material";
 import { AppBar, styled, alpha } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { createElement } from "react";
@@ -18,6 +18,7 @@ const TaskBarContainer = styled(AppBar)(({ theme }) => ({
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
+  transition: theme.transitions.create(["background"]),
 }));
 
 function TaskBar() {
@@ -48,9 +49,6 @@ function TaskBar() {
     <TaskBarContainer>
       <TaskButton onClick={handleToggleMenu}>
         <Apps fontSize={desktopStore.taskBarIconSize} color="primary" />
-      </TaskButton>
-      <TaskButton onClick={handleToggleMenu}>
-        <Search fontSize={desktopStore.taskBarIconSize} color="action" />
       </TaskButton>
       <TaskButton onClick={systemStore.toggleTheme}>
         {systemStore.theme === "light" ? (
