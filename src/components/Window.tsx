@@ -27,6 +27,7 @@ const WindowPaper = styled(Paper)(({ theme }) => ({
 
 function Window(props: WindowProps) {
   const { children, window } = props;
+  const zIndex = windowManager.getFocusOrder(window.taskId);
 
   function updatePosition(e: any, data: any) {
     windowManager.setPosition(window.taskId, data.x, data.y);
@@ -61,9 +62,9 @@ function Window(props: WindowProps) {
       onResizeStop={updateSize}
       cancel=".content"
       enableResizing={window.isResizable}
-      style={{ cursor: "default" }}
+      style={{ cursor: "default", zIndex }}
     >
-      <WindowPaper>
+      <WindowPaper onClick={() => windowManager.setFocus(window.taskId)}>
         <TopBar className="topBar" noMinimize noMaximize {...props} />
 
         <Box

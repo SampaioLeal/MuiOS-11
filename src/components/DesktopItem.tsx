@@ -17,7 +17,8 @@ interface DesktopItemProps {
 }
 
 const Item = styled(ButtonBase)(({ theme }) => ({
-  height: theme.spacing(10),
+  height: 90,
+  width: 150,
   padding: theme.spacing(1),
   display: "flex",
   flexDirection: "column",

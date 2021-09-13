@@ -7,20 +7,18 @@ class WindowManager {
   }
 
   windows: Map<number, IWindow> = new Map();
-  focusedId = 0;
+  focusOrder: number[] = [];
 
   get list() {
     return Array.from(this.windows.values());
   }
 
-  get nonFocused() {
-    return Array.from(this.windows.values()).filter(
-      (window) => !window.isFocused && !window.isMinimized
-    );
+  get active() {
+    return Array.from(this.windows.values());
   }
 
-  get focused() {
-    return this.windows.get(this.focusedId);
+  getFocusOrder(taskId: number) {
+    return this.focusOrder.findIndex((id) => taskId === id);
   }
 
   register(executable: Executable, id: number) {
@@ -50,21 +48,33 @@ class WindowManager {
       if (window.isMinimized) {
         window.isMinimized = false;
         window.isFocused = true;
-        this.focusedId = id;
+        this.setFocus(id);
       } else {
         window.isMinimized = true;
         window.isFocused = false;
-        this.focusedId = 0;
+        this.removeFocus(id);
       }
     }
   }
 
   setFocus(id: number) {
+    const actualIndex = this.focusOrder.findIndex((taskId) => taskId === id);
+
+    if (this.focusOrder.length && actualIndex === this.focusOrder.length - 1)
+      return;
+
     this.windows.forEach((window) => {
       if (window.taskId === id) window.isFocused = true;
       else window.isFocused = false;
     });
-    this.focusedId = id;
+
+    if (actualIndex > -1) this.focusOrder.splice(actualIndex, 1);
+    this.focusOrder.push(id);
+  }
+
+  removeFocus(id: number) {
+    const actualIndex = this.focusOrder.findIndex((taskId) => taskId === id);
+    this.focusOrder.splice(actualIndex, 1);
   }
 
   setPosition(id: number, x: number, y: number) {

@@ -3,11 +3,9 @@ import taskManager from "../stores/taskManager";
 import windowManager from "../stores/windowManager";
 
 function WindowManager() {
-  const focusedWindow = windowManager.focused;
-
   return (
     <>
-      {windowManager.nonFocused.map((window) => {
+      {windowManager.active.map((window) => {
         const { Executable, taskId } = window;
 
         return (
@@ -18,13 +16,6 @@ function WindowManager() {
           />
         );
       })}
-
-      {focusedWindow && (
-        <focusedWindow.Executable
-          handleClose={() => taskManager.close(focusedWindow.taskId)}
-          window={focusedWindow}
-        />
-      )}
     </>
   );
 }
