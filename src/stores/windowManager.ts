@@ -52,7 +52,9 @@ class WindowManager {
       } else {
         window.isMinimized = true;
         window.isFocused = false;
-        this.removeFocus(id);
+        setTimeout(() => {
+          this.removeFocus(id);
+        }, 500);
       }
     }
   }

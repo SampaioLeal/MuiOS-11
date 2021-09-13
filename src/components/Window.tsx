@@ -1,4 +1,4 @@
-import { Box, Paper, styled, alpha } from "@mui/material";
+import { Box, Paper, styled, alpha, Grow } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { ReactNode } from "react";
 import { Rnd } from "react-rnd";
@@ -62,21 +62,27 @@ function Window(props: WindowProps) {
       onResizeStop={updateSize}
       cancel=".content"
       enableResizing={window.isResizable}
-      style={{ cursor: "default", zIndex }}
+      style={{
+        cursor: "default",
+        zIndex: zIndex === -1 ? 0 : zIndex,
+        pointerEvents: zIndex === -1 ? "none" : "all",
+      }}
     >
-      <WindowPaper onClick={() => windowManager.setFocus(window.taskId)}>
-        <TopBar className="topBar" noMinimize noMaximize {...props} />
+      <Grow in={!window.isMinimized && zIndex !== -1}>
+        <WindowPaper onMouseDown={() => windowManager.setFocus(window.taskId)}>
+          <TopBar className="topBar" noMinimize noMaximize {...props} />
 
-        <Box
-          className="content"
-          display="flex"
-          flexDirection="column"
-          flexGrow={1}
-          padding={2}
-        >
-          {children}
-        </Box>
-      </WindowPaper>
+          <Box
+            className="content"
+            display="flex"
+            flexDirection="column"
+            flexGrow={1}
+            padding={2}
+          >
+            {children}
+          </Box>
+        </WindowPaper>
+      </Grow>
     </Rnd>
   );
 }

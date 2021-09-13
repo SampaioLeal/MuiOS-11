@@ -14,7 +14,6 @@ export const sysExecutables: { [key: string]: Executable } = {
     },
   },
   commitzero: {
-    signleInstance: true,
     exe: CommitZero,
     icon: Book,
     defaultSize: {
