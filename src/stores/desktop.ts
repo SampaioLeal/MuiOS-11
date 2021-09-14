@@ -20,9 +20,9 @@ class DesktopStore {
       exe: "muiosver",
     },
     {
-      title: "CommitZero",
+      title: "My Portfolio",
       icon: Book,
-      exe: "commitzero",
+      exe: "portfolio",
     },
   ];
 }

@@ -23,6 +23,12 @@ const WindowPaper = styled(Paper)(({ theme }) => ({
   background: alpha(theme.palette.background.paper, 0.95),
   backdropFilter: "blur(10px)",
   transition: theme.transitions.create(["background"]),
+
+  iframe: {
+    border: "none",
+    borderBottomLeftRadius: theme.spacing(1),
+    borderBottomRightRadius: theme.spacing(1),
+  },
 }));
 
 function Window(props: WindowProps) {
@@ -72,13 +78,7 @@ function Window(props: WindowProps) {
         <WindowPaper onMouseDown={() => windowManager.setFocus(window.taskId)}>
           <TopBar className="topBar" noMinimize noMaximize {...props} />
 
-          <Box
-            className="content"
-            display="flex"
-            flexDirection="column"
-            flexGrow={1}
-            padding={2}
-          >
+          <Box className="content" flexGrow={1}>
             {children}
           </Box>
         </WindowPaper>

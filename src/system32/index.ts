@@ -1,6 +1,6 @@
 import { Book, Info } from "@mui/icons-material";
 import AboutSystem from "./AboutSystem";
-import CommitZero from "./CommitZero";
+import Portfolio from "./Portfolio";
 
 export const sysExecutables: { [key: string]: Executable } = {
   muiosver: {
@@ -13,8 +13,8 @@ export const sysExecutables: { [key: string]: Executable } = {
       height: 450,
     },
   },
-  commitzero: {
-    exe: CommitZero,
+  portfolio: {
+    exe: Portfolio,
     icon: Book,
     defaultSize: {
       width: 700,

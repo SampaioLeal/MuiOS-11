@@ -7,7 +7,7 @@ import taskManager from "../stores/taskManager";
 function AboutSystem(props: TaskProps) {
   return (
     <Window title="About MuiOS" {...props}>
-      <Box flexGrow={1}>
+      <Box display="flex" flexDirection="column" height="100%" padding={2}>
         <Typography variant="h2" color="primary" align="center">
           MuiOS 11
         </Typography>
@@ -20,16 +20,16 @@ function AboutSystem(props: TaskProps) {
 
         <br />
 
-        <Typography>
+        <Typography sx={{ flexGrow: 1 }}>
           This web system is made with React, Material-UI and some other stuff
           from JavaScript ecosystem.
         </Typography>
-      </Box>
 
-      <Box display="flex" justifyContent="flex-end">
-        <BasicButton onClick={() => taskManager.close(props.window.taskId)}>
-          OK
-        </BasicButton>
+        <Box display="flex" justifyContent="flex-end">
+          <BasicButton onClick={() => taskManager.close(props.window.taskId)}>
+            OK
+          </BasicButton>
+        </Box>
       </Box>
     </Window>
   );
