@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import desktopStore from "./desktop";
 
 class WindowManager {
@@ -38,7 +38,14 @@ class WindowManager {
   }
 
   unregister(id: number) {
-    this.windows.delete(id);
+    this.toggleVisibility(id);
+    setTimeout(
+      () =>
+        runInAction(() => {
+          this.windows.delete(id);
+        }),
+      500
+    );
   }
 
   toggleVisibility(id: number) {
