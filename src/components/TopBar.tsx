@@ -1,4 +1,4 @@
-import { CheckBoxOutlineBlank, Close } from "@mui/icons-material";
+import { CheckBoxOutlineBlank, Close, Minimize } from "@mui/icons-material";
 import { Box, ButtonBase, styled, Typography, alpha } from "@mui/material";
 import taskManager from "../stores/taskManager";
 import windowManager from "../stores/windowManager";
@@ -49,6 +49,11 @@ export function TopBar(props: TopBarProps) {
         {props.title}
       </Typography>
 
+      <WindowControlButton
+        onClick={() => windowManager.toggleVisibility(props.window.taskId)}
+      >
+        <Minimize fontSize="small" />
+      </WindowControlButton>
       <WindowControlButton
         onClick={() => windowManager.maximize(props.window.taskId)}
       >
