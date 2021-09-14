@@ -1,5 +1,7 @@
-import { Close } from "@mui/icons-material";
+import { CheckBoxOutlineBlank, Close } from "@mui/icons-material";
 import { Box, ButtonBase, styled, Typography, alpha } from "@mui/material";
+import taskManager from "../stores/taskManager";
+import windowManager from "../stores/windowManager";
 import { WindowProps } from "./Window";
 
 export const TopBarContainer = styled(Box)(({ theme }) => ({
@@ -7,25 +9,31 @@ export const TopBarContainer = styled(Box)(({ theme }) => ({
   borderTopRightRadius: theme.spacing(1),
   height: theme.spacing(4),
   background: alpha(theme.buttons.basicButton, 0.9),
-  backdropFilter: "blur(10px)",
   display: "flex",
   alignItems: "center",
   paddingLeft: theme.spacing(1),
   transition: theme.transitions.create(["background"]),
 }));
 
-export const CloseButton = styled(ButtonBase)(({ theme }) => ({
+export const WindowControlButton = styled(ButtonBase)(({ theme }) => ({
   height: "100%",
   padding: theme.spacing(1),
-  borderTopRightRadius: theme.spacing(1),
   background: "transparent",
+
+  "&:hover": {
+    background: alpha(theme.palette.text.primary, 0.05),
+  },
+
+  transition: theme.transitions.create(["background", "color"]),
+}));
+
+export const CloseButton = styled(WindowControlButton)(({ theme }) => ({
+  borderTopRightRadius: theme.spacing(1),
 
   "&:hover": {
     background: theme.palette.error.main,
     color: theme.palette.error.contrastText,
   },
-
-  transition: theme.transitions.create(["background", "color"]),
 }));
 
 interface TopBarProps extends WindowProps {
@@ -41,7 +49,12 @@ export function TopBar(props: TopBarProps) {
         {props.title}
       </Typography>
 
-      <CloseButton onClick={props.handleClose}>
+      <WindowControlButton
+        onClick={() => windowManager.maximize(props.window.taskId)}
+      >
+        <CheckBoxOutlineBlank fontSize="small" />
+      </WindowControlButton>
+      <CloseButton onClick={() => taskManager.close(props.window.taskId)}>
         <Close fontSize="small" />
       </CloseButton>
     </TopBarContainer>

@@ -12,6 +12,7 @@ class DesktopStore {
   taskBarHeight = 40;
   topBarHeight = 32;
   desktopHeight = window.innerHeight - this.taskBarHeight;
+  desktopWidth = window.innerWidth;
   items = [
     {
       title: "About MuiOS 11",

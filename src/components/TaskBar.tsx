@@ -1,4 +1,4 @@
-import { Apps, Brightness4, Brightness7 } from "@mui/icons-material";
+import { Brightness4, Brightness7, Dashboard } from "@mui/icons-material";
 import { AppBar, styled, alpha } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { createElement } from "react";
@@ -48,7 +48,7 @@ function TaskBar() {
   return (
     <TaskBarContainer>
       <TaskButton onClick={handleToggleMenu}>
-        <Apps fontSize={desktopStore.taskBarIconSize} color="primary" />
+        <Dashboard fontSize={desktopStore.taskBarIconSize} color="primary" />
       </TaskButton>
       <TaskButton onClick={systemStore.toggleTheme}>
         {systemStore.theme === "light" ? (

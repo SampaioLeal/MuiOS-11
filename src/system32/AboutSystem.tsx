@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import BasicButton from "../components/BasicButton";
 import Window from "../components/Window";
+import taskManager from "../stores/taskManager";
 
 function AboutSystem(props: TaskProps) {
   return (
@@ -26,7 +27,9 @@ function AboutSystem(props: TaskProps) {
       </Box>
 
       <Box display="flex" justifyContent="flex-end">
-        <BasicButton onClick={props.handleClose}>OK</BasicButton>
+        <BasicButton onClick={() => taskManager.close(props.window.taskId)}>
+          OK
+        </BasicButton>
       </Box>
     </Window>
   );

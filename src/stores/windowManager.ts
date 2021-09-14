@@ -66,6 +66,17 @@ class WindowManager {
     }
   }
 
+  maximize(taskId: number) {
+    const window = this.windows.get(taskId);
+
+    if (window) {
+      window.height = desktopStore.desktopHeight;
+      window.width = desktopStore.desktopWidth;
+      window.x = 0;
+      window.y = 0;
+    }
+  }
+
   setFocus(id: number) {
     const actualIndex = this.focusOrder.findIndex((taskId) => taskId === id);
 

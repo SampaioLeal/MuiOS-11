@@ -19,5 +19,4 @@ interface Task extends Executable {
 
 interface TaskProps {
   window: IWindow;
-  handleClose(): void;
 }
