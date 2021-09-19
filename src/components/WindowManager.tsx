@@ -4,7 +4,7 @@ import windowManager from "../stores/windowManager";
 function WindowManager() {
   return (
     <>
-      {windowManager.active.map((window) => {
+      {windowManager.list.map((window) => {
         const { Executable, taskId } = window;
 
         return <Executable key={`program-${taskId}`} window={window} />;

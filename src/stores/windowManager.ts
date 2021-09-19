@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import desktopStore from "./desktop";
 
 class WindowManager {
@@ -10,10 +10,6 @@ class WindowManager {
   focusOrder: number[] = [];
 
   get list() {
-    return Array.from(this.windows.values());
-  }
-
-  get active() {
     return Array.from(this.windows.values());
   }
 
@@ -39,13 +35,7 @@ class WindowManager {
 
   unregister(id: number) {
     this.toggleVisibility(id);
-    setTimeout(
-      () =>
-        runInAction(() => {
-          this.windows.delete(id);
-        }),
-      500
-    );
+    this.windows.delete(id);
   }
 
   toggleVisibility(id: number) {
@@ -59,9 +49,7 @@ class WindowManager {
       } else {
         window.isMinimized = true;
         window.isFocused = false;
-        setTimeout(() => {
-          this.removeFocus(id);
-        }, 500);
+        this.removeFocus(id);
       }
     }
   }

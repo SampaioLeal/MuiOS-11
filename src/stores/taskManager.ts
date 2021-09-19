@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { sysExecutables } from "../system32";
 import windowManager from "./windowManager";
 
@@ -39,13 +39,7 @@ class TaskManager {
 
   close(id: number) {
     windowManager.unregister(id);
-    setTimeout(
-      () =>
-        runInAction(() => {
-          this.tasks.delete(id);
-        }),
-      500
-    );
+    this.tasks.delete(id);
   }
 }
 
