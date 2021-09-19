@@ -39,6 +39,8 @@ class WindowManager {
   }
 
   toggleVisibility(id: number) {
+    const focusedWindow = this.focusOrder[this.focusOrder.length - 1];
+    const isFocused = focusedWindow === id;
     const window = this.windows.get(id);
 
     if (window) {
@@ -47,9 +49,13 @@ class WindowManager {
         window.isFocused = true;
         this.setFocus(id);
       } else {
-        window.isMinimized = true;
-        window.isFocused = false;
-        this.removeFocus(id);
+        if (isFocused) {
+          window.isMinimized = true;
+          window.isFocused = false;
+          this.removeFocus(id);
+        } else {
+          this.setFocus(id);
+        }
       }
     }
   }
