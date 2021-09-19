@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { sysExecutables } from "../system32";
+import systemStore from "./system";
 import windowManager from "./windowManager";
 
 class TaskManager {
@@ -35,6 +36,7 @@ class TaskManager {
     this.lastId = id;
 
     windowManager.register(executable, id);
+    systemStore.closeMenu();
   }
 
   close(id: number) {

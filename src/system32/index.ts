@@ -4,6 +4,7 @@ import Portfolio from "./Portfolio";
 
 export const sysExecutables: { [key: string]: Executable } = {
   muiosver: {
+    title: "About MuiOS 11",
     signleInstance: true,
     isResizable: false,
     exe: AboutSystem,
@@ -14,6 +15,7 @@ export const sysExecutables: { [key: string]: Executable } = {
     },
   },
   portfolio: {
+    title: "My Portfolio",
     exe: Portfolio,
     icon: Book,
     defaultSize: {

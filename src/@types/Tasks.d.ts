@@ -1,5 +1,6 @@
 interface Executable {
   signleInstance?: boolean;
+  title: string;
   isResizable?: boolean;
   exe: FunctionComponent<TaskProps>;
   icon: import("@mui/material").OverridableComponent<

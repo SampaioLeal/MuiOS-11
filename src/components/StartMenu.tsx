@@ -5,6 +5,7 @@ import {
   Box,
   ClickAwayListener,
   darken,
+  Grid,
   Grow,
   IconButton,
   styled,
@@ -13,6 +14,8 @@ import {
 import { observer } from "mobx-react-lite";
 import desktopStore from "../stores/desktop";
 import systemStore from "../stores/system";
+import { sysExecutables } from "../system32";
+import DesktopItem from "./DesktopItem";
 
 const MenuModal = styled(Box)(({ theme }) => ({
   width: 600,
@@ -60,7 +63,21 @@ function StartMenu() {
     >
       <Grow in={systemStore.isMenuOpen}>
         <MenuModal>
-          <Box flexGrow={1}></Box>
+          <Box flexGrow={1} padding={2}>
+            <Grid container spacing={1}>
+              {Object.entries(sysExecutables).map(
+                ([program, executable], index) => (
+                  <Grid item key={`start-exec-${index}`}>
+                    <DesktopItem
+                      title={executable.title}
+                      icon={executable.icon}
+                      exe={program}
+                    />
+                  </Grid>
+                )
+              )}
+            </Grid>
+          </Box>
           <ProfileBar>
             <Avatar sx={{ marginRight: 2, color: "#484848" }}>SL</Avatar>
             <Typography sx={{ flexGrow: 1 }}>Sampaio Leal</Typography>
